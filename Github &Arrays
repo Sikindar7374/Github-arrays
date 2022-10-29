@@ -1,0 +1,42 @@
+#include <iostream>
+ #include <vector>
+ #include <unordered_map>
+using namespace std;
+
+vector<int> PairingSum(vector<int>& nums, int target) {
+        vector<int> result;
+        unordered_map<int, int> dict;
+        
+        for (int i = 0; i < nums.size(); i++) {
+            int v = target - nums[i];
+            if (dict.count(v) > 0) {
+                result.push_back(dict[v]);
+                result.push_back(i);
+                break;
+            }
+            dict[nums[i]] = i;
+        }
+        
+        return result;
+    }
+int main()
+{
+    vector<int> vect;
+    int n,temp,target;
+    cout << "Enter number of elements in array: \n";
+    cin >> n;
+    cout << "Enter elements: \n\n ";
+    for(int i=0;i<n;i++){
+        cout << "Enter element"+to_string(i+1)+": \n";
+        cin >> temp;
+        vect.push_back(temp);
+    }
+    cout << "\nEnter target: \n";
+    cin >> target;
+    
+    vector<int> result=PairingSum(vect,target);
+    for (int x : result)
+        cout << x << " ";
+
+    return 0;
+}
